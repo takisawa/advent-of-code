@@ -1,6 +1,6 @@
 
 calories = 0
-max_calories = 0
+max_calories = []
 
 File.open('input', 'r') do |f|
   while line = f.gets
@@ -10,8 +10,8 @@ File.open('input', 'r') do |f|
     when ""
       max_calories
 
-      if calories > max_calories
-        max_calories = calories
+      if calories > (max_calories[-1] || 0)
+        max_calories = (max_calories << calories).max(3)
       end
 
       calories = 0
@@ -21,4 +21,4 @@ File.open('input', 'r') do |f|
   end
 end
 
-p max_calories
+p max_calories.sum
